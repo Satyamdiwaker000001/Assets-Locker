@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Assets Locker Resource",
+  "description": "Metadata contract for an Assets Locker catalog record.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "url", "category", "type", "purpose", "status"],
+  "properties": {
+    "name": { "type": "string", "minLength": 1 },
+    "url": { "type": "string", "format": "uri" },
+    "category": { "type": "string", "minLength": 1 },
+    "type": {
+      "type": "string",
+      "enum": ["tool", "library", "reference", "asset-collection", "article", "documentation"]
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+      "uniqueItems": true
+    },
+    "purpose": { "type": "string", "minLength": 1 },
+    "use_case": { "type": "string" },
+    "stack": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "project_fit": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "license_notes": { "type": "string" },
+    "attribution_required": { "type": ["boolean", "null"] },
+    "status": { "type": "string", "enum": ["to-review", "verified", "used", "archived"] },
+    "last_reviewed": { "type": "string", "format": "date" },
+    "used_in": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "notes": { "type": "string" }
+  }
+}
